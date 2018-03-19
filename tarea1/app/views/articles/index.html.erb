@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<h1>Noticias</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Titulo</th>
+      <th>Bajada</th>
+      <th>Cuerpo</th>
+      <th>Fecha</th>
+      <th>Comentarios</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if user_signed_in? %>
+      <% @articles.each do |article| %>
+        <tr>
+          <td><%= article.titlr %></td>
+          <td><%= article.bajada %></td>
+          <% if article.body.length > 500 %>
+            <%$n = 499%>
+            <%until article.body[$n] == " " do %>
+              <%$n = $n-1%>
+            <%end%>
+            <td><%= "#{article.body[0..$n]}..." %></td>
+          <% else %>
+            <td><%= article.body %></td>
+          <% end %>
+          <td><%= article.created_at %></td>
+          <td><%= article.comentarios.to_s %></td>
+          <td><%= link_to 'Ir a noticia', article %></td>
+          <td><%= link_to 'Editar', edit_article_path(article) %></td>
+          <td><%= link_to 'Eliminar', article, method: :delete, data: { confirm: 'Seguro?' } %></td>
+        </tr>
+      <% end %>
+    <% else %>
+    <% @articles.first(10).each do |article| %>
+      <tr>
+        <td><%= article.titlr %></td>
+        <td><%= article.bajada %></td>
+        <td><%= article.body %></td>
+        <td><%= article.created_at %></td>
+        <td><%= article.comentarios.to_s %></td>
+        <td><%= link_to 'Ir a noticia', article %></td>
+      </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
+<% if user_signed_in? %>
+  <%= link_to 'Articulo nuevo', new_article_path %>
+<% end %>
+<br>

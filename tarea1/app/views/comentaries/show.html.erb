@@ -1,0 +1,14 @@
+
+
+<p>
+  <strong>Content:</strong>
+  <%= @comentary.content %>
+</p>
+
+<p>
+  <strong>User_id:</strong>
+  <%= @comentary.user_id %>
+</p>
+
+<%= link_to 'Editar', edit_comentary_path(@comentary) %> |
+<%= link_to 'Volver', articles_path %>
