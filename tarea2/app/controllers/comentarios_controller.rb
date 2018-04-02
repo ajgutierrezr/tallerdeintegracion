@@ -21,13 +21,13 @@ class ComentariosController < ApplicationController
   # PUT
   def update
     @comentario.update(comentario_params)
-    head :no_content
+    json_response(@comentario)
   end
 
   # DELETE
   def destroy
     @comentario.destroy
-    head :no_content
+    json_response(@noticia.comentarios)
   end
 
   private

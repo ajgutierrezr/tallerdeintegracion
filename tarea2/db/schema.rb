@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180330200014) do
+ActiveRecord::Schema.define(version: 20180402215204) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,7 +20,6 @@ ActiveRecord::Schema.define(version: 20180330200014) do
     t.string   "comment"
     t.integer  "noticia_id"
     t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.index ["noticia_id"], name: "index_comentarios_on_noticia_id", using: :btree
   end
 
@@ -29,7 +28,6 @@ ActiveRecord::Schema.define(version: 20180330200014) do
     t.string   "body"
     t.string   "subtitle"
     t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   add_foreign_key "comentarios", "noticia", column: "noticia_id"
