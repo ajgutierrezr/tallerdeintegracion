@@ -1,6 +1,6 @@
 class ComentariosController < ApplicationController
   before_action :set_noticia
-  before_action :set_noticia_comentario, only: [:show, :update, :destroy]
+  before_action :set_noticia_comentario, only: [:show, :update, :destroy, :update2]
 
   # GET
   def index
@@ -14,13 +14,18 @@ class ComentariosController < ApplicationController
 
   # POST
   def create
-    @noticia.comentarios.create!(comentario_params)
-    json_response(@noticia, :created)
+    $c = @noticia.comentarios.create!(comentario_params)
+    json_response($c, :created)
   end
 
   # PUT
   def update
     @comentario.update(comentario_params)
+    json_response(@comentario)
+  end
+
+  def update2
+    @comentario.update(comentario_params2)
     json_response(@comentario)
   end
 
@@ -33,6 +38,11 @@ class ComentariosController < ApplicationController
   private
 
   def comentario_params
+    params.permit(:author, :comment)
+  end
+
+  def comentario_params2
+    params.require([:author, :comment, :created_at])
     params.permit(:author, :comment)
   end
 

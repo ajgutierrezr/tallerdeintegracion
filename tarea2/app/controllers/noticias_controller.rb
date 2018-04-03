@@ -1,5 +1,5 @@
 class NoticiasController < ApplicationController
-  before_action :set_noticia, only: [:show, :update, :destroy]
+  before_action :set_noticia, only: [:show, :update, :destroy, :update2]
 
   # GET
   def index
@@ -52,7 +52,8 @@ class NoticiasController < ApplicationController
   end
 
   def noticia_params2
-    params.require(:title, :body, :subtitle)
+    params.require([:title, :body, :subtitle, :created_at])
+    params.permit(:title, :body, :subtitle)
   end
 
   def set_noticia
